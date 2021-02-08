@@ -6,7 +6,7 @@ import (
 
 	"github.com/micro/cli/v2"
 	"github.com/micro/go-micro/v2/agent/input"
-	"github.com/nlopes/slack"
+	"github.com/slack-go/slack"
 )
 
 type slackInput struct {

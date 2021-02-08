@@ -2,6 +2,7 @@
 package input
 
 import (
+	"github.com/bwmarrin/discordgo"
 	"github.com/micro/cli/v2"
 )
 
@@ -19,11 +20,12 @@ var (
 
 // Event is the unit sent and received
 type Event struct {
-	Type EventType
-	From string
-	To   string
-	Data []byte
-	Meta map[string]interface{}
+	DiscordMsg *discordgo.Message
+	Type       EventType
+	From       string
+	To         string
+	Data       []byte
+	Meta       map[string]interface{}
 }
 
 // Input is an interface for sources which

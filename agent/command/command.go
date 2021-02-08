@@ -1,6 +1,10 @@
 // Package command is an interface for defining bot commands
 package command
 
+import (
+	nakama "github.com/challenge-league/nakama-go/context"
+)
+
 var (
 	// Commmands keyed by golang/regexp patterns
 	// regexp.Match(key, input) is used to match
@@ -11,7 +15,7 @@ var (
 // commands executed via plugins or the bot.
 type Command interface {
 	// Executes the command with args passed in
-	Exec(args ...string) ([]byte, error)
+	Exec(nakamaCtx *nakama.Context, args ...string) ([]byte, error)
 	// Usage of the command
 	Usage() string
 	// Description of the command
@@ -24,15 +28,15 @@ type cmd struct {
 	name        string
 	usage       string
 	description string
-	exec        func(args ...string) ([]byte, error)
+	exec        func(nakamaCtx *nakama.Context, args ...string) ([]byte, error)
 }
 
 func (c *cmd) Description() string {
 	return c.description
 }
 
-func (c *cmd) Exec(args ...string) ([]byte, error) {
-	return c.exec(args...)
+func (c *cmd) Exec(nakamaCtx *nakama.Context, args ...string) ([]byte, error) {
+	return c.exec(nakamaCtx, args...)
 }
 
 func (c *cmd) Usage() string {
@@ -44,7 +48,7 @@ func (c *cmd) String() string {
 }
 
 // NewCommand helps quickly create a new command
-func NewCommand(name, usage, description string, exec func(args ...string) ([]byte, error)) Command {
+func NewCommand(name, usage, description string, exec func(nakamaCtx *nakama.Context, args ...string) ([]byte, error)) Command {
 	return &cmd{
 		name:        name,
 		usage:       usage,

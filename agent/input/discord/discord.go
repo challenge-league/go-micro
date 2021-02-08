@@ -50,7 +50,7 @@ func (d *discordInput) Flags() []cli.Flag {
 			Name:    "discord_prefix",
 			Usage:   "Discord Prefix",
 			EnvVars: []string{"MICRO_DISCORD_PREFIX"},
-			Value:   "Micro ",
+			Value:   "dl ",
 		},
 	}
 }

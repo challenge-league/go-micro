@@ -2,6 +2,8 @@ package command
 
 import (
 	"testing"
+
+	nakama "github.com/challenge-league/nakama-go/v2"
 )
 
 func TestCommand(t *testing.T) {
@@ -9,7 +11,7 @@ func TestCommand(t *testing.T) {
 		name:        "test",
 		usage:       "test usage",
 		description: "test description",
-		exec: func(args ...string) ([]byte, error) {
+		exec: func(nakamaCtx *nakama.Context, args ...string) ([]byte, error) {
 			return []byte("test"), nil
 		},
 	}
@@ -26,7 +28,7 @@ func TestCommand(t *testing.T) {
 		t.Fatalf("expected description %s got %s", c.description, c.Description())
 	}
 
-	if r, err := c.Exec(); err != nil {
+	if r, err := c.Exec(nil); err != nil {
 		t.Fatal(err)
 	} else if string(r) != "test" {
 		t.Fatalf("expected exec result test got %s", string(r))
@@ -38,7 +40,7 @@ func TestNewCommand(t *testing.T) {
 		name:        "test",
 		usage:       "test usage",
 		description: "test description",
-		exec: func(args ...string) ([]byte, error) {
+		exec: func(nakamaCtx *nakama.Context, args ...string) ([]byte, error) {
 			return []byte("test"), nil
 		},
 	}
@@ -57,7 +59,7 @@ func TestNewCommand(t *testing.T) {
 		t.Fatalf("expected description %s got %s", c.description, nc.Description())
 	}
 
-	if r, err := nc.Exec(); err != nil {
+	if r, err := nc.Exec(nil); err != nil {
 		t.Fatal(err)
 	} else if string(r) != "test" {
 		t.Fatalf("expected exec result test got %s", string(r))

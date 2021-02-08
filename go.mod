@@ -72,3 +72,7 @@ require (
 	gopkg.in/telegram-bot-api.v4 v4.6.4
 	sigs.k8s.io/yaml v1.1.0 // indirect
 )
+
+replace github.com/challenge-league/nakama-go/v2 => ./nakama-go
+
+// replace github.com/go-telegram-bot-api/telegram-bot-api => ../telegram-bot-api
